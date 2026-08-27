@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gloss Estética & Beleza | Agendamento Online</title>
+    <meta name="description" content="Agende seus serviços de estética, manicure, pedicure e spa dos pés na Gloss Estética & Beleza. Atendimento exclusivo em São José/SC.">
 
-    <!-- Tailwind CSS -->
+    <!-- Tailwind CSS (Development Mode) -->
     <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts -->
@@ -50,7 +51,6 @@
     </script>
 
     <style>
-        /* Smooth scrolling and app feel touch setups */
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #FAF5F8;
@@ -72,7 +72,6 @@
             border-bottom: 1px solid rgba(84, 57, 118, 0.08);
         }
 
-        /* Gradient animations */
         .bg-gradient-gloss {
             background: linear-gradient(135deg, #543976 0%, #7855A4 50%, #D84B8C 100%);
         }
@@ -87,7 +86,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Pulse badge for online availability */
         @keyframes pulse-ring {
             0% { transform: scale(0.95); opacity: 0.8; }
             50% { transform: scale(1.15); opacity: 0.4; }
@@ -97,7 +95,6 @@
             animation: pulse-ring 2s infinite ease-in-out;
         }
 
-        /* Custom scrollbar for horizontal categories */
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -106,13 +103,25 @@
             scrollbar-width: none;
         }
 
-        /* Badge bounce */
         @keyframes float-gentle {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-5px); }
         }
         .animate-float {
             animation: float-gentle 3s ease-in-out infinite;
+        }
+        
+        /* Accordion Transition */
+        .faq-content {
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .faq-item.active .faq-content {
+            max-height: 200px;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
         }
     </style>
 </head>
@@ -121,18 +130,16 @@
     <!-- Top Announcement Bar -->
     <div class="bg-gradient-gloss text-white text-xs font-medium py-2 px-4 text-center flex items-center justify-center gap-2 shadow-sm">
         <span class="inline-flex items-center justify-center w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-        <span>✨ <strong>Atendimento Exclusivo:</strong> Reserve seu horário online e ganhe atendimento prioritário!</span>
-        <a href="#servicos" class="underline font-semibold hover:text-pink-200 transition ml-1 hidden sm:inline">Ver Tabela de Serviços</a>
+        <span>✨ <strong>Atendimento Exclusivo:</strong> Reserve online e ganhe prioridade!</span>
+        <a href="#servicos" class="underline font-semibold hover:text-pink-200 transition ml-1 hidden sm:inline">Ver Serviços</a>
     </div>
 
     <!-- Sticky Navigation Header -->
     <header class="sticky top-0 z-40 glass-header shadow-sm transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            
-            <!-- Logo Section - High Prominence -->
             <a href="#" class="flex items-center gap-3 group">
                 <div class="relative p-1 rounded-2xl bg-white border border-brand-pink/20 shadow-md group-hover:scale-105 transition-transform duration-300">
-                    <img src="https://i.ibb.co/vvQm24YD/logo.jpg" alt="Gloss Estética & Beleza Logo" class="h-12 w-auto object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/150x150/543976/ffffff?text=GLOSS';">
+                    <img src="https://i.ibb.co/vvQm24YD/logo.jpg" alt="Gloss Logo" class="h-12 w-auto object-contain rounded-xl" onerror="this.onerror=null; this.src='https://placehold.co/150x150/543976/ffffff?text=GLOSS';">
                 </div>
                 <div class="hidden sm:block">
                     <span class="block text-xl font-bold tracking-tight text-brand-purple font-serif leading-none">Gloss</span>
@@ -140,30 +147,24 @@
                 </div>
             </a>
 
-            <!-- Desktop Navigation Links -->
             <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-700">
-                <a href="#servicos" class="hover:text-brand-pink transition-colors">Serviços & Preços</a>
-                <a href="#combos" class="hover:text-brand-pink transition-colors">Monte Seu Pacote</a>
-                <a href="#sobre" class="hover:text-brand-pink transition-colors">Sobre Nós</a>
+                <a href="#servicos" class="hover:text-brand-pink transition-colors">Serviços</a>
+                <a href="#combos" class="hover:text-brand-pink transition-colors">Pacotes</a>
+                <a href="#depoimentos" class="hover:text-brand-pink transition-colors">Depoimentos</a>
+                <a href="#faq" class="hover:text-brand-pink transition-colors">Dúvidas</a>
                 <a href="#localizacao" class="hover:text-brand-pink transition-colors">Localização</a>
             </nav>
 
-            <!-- Top Action Buttons -->
+            <!-- HEADER ACTIONS UPDATED WITH CART NEXT TO WHATSAPP -->
             <div class="flex items-center gap-3">
-                <!-- Location shortcut -->
-                <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" rel="noopener noreferrer" class="hidden sm:flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-brand-purple bg-brand-pinkSoft hover:bg-brand-pink/10 rounded-full transition border border-brand-pink/20" title="Ver no Google Maps">
-                    <i class="fa-solid fa-location-dot text-brand-pink"></i>
-                    <span>Ver Endereço</span>
-                </a>
-
-                <!-- Cart / Selection Badge Trigger -->
-                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white transition shadow-sm border border-brand-pink/20">
-                    <i class="fa-solid fa-sparkles text-lg"></i>
+                <!-- Cart Button (Now visible next to WhatsApp) -->
+                <button onclick="toggleCartDrawer()" class="relative p-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white transition shadow-sm border border-brand-pink/20" aria-label="Ver seleção de serviços">
+                    <i class="fa-solid fa-basket-shopping text-lg"></i>
                     <span id="cart-badge-count" class="hidden absolute -top-1 -right-1 bg-brand-pink text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white shadow-md">0</span>
                 </button>
 
-                <!-- Primary WhatsApp CTA -->
-                <a href="https://wa.me/?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio%20na%20Gloss%20Est%C3%A9tica%20%26%20Beleza!" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-purple-glow hover:shadow-lg transition duration-300 transform active:scale-95">
+                <!-- WhatsApp Button -->
+                <a href="https://wa.me/5548984227642?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar." target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs sm:text-sm shadow-purple-glow hover:shadow-lg transition duration-300 transform active:scale-95">
                     <i class="fa-brands fa-whatsapp text-base"></i>
                     <span class="hidden sm:inline">Agendar Agora</span>
                     <span class="sm:hidden">Agendar</span>
@@ -172,716 +173,394 @@
         </div>
     </header>
 
-    <!-- Hero Banner with High Conversion Copy & Visual Polish -->
+    <!-- Hero Banner -->
     <section class="relative overflow-hidden pt-8 pb-12 lg:pt-14 lg:pb-20">
-        <!-- Background Ambient Glow Shapes -->
         <div class="absolute top-10 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-tr from-brand-pinkSoft via-purple-100/40 to-pink-100/50 blur-3xl -z-10 rounded-full opacity-70"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                
-                <!-- Left Column: Copy & Value Proposition -->
                 <div class="lg:col-span-7 text-center lg:text-left space-y-6">
-                    
-                    <!-- Rating Badge -->
                     <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-brand-pink/20 shadow-sm text-xs font-semibold text-brand-purple">
                         <div class="flex text-amber-400 text-xs">
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
                         </div>
                         <span class="text-slate-700">5.0 no Google</span>
                         <span class="text-slate-300">•</span>
-                        <span class="text-brand-pink font-bold">+2.500 Clientes Satisfeitas</span>
+                        <span class="text-brand-pink font-bold">+2.500 Clientes</span>
                     </div>
 
-                    <!-- Main Headline -->
                     <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-brand-purple font-serif leading-tight tracking-tight">
                         Sua beleza tratada com a <span class="text-gradient-gloss italic font-normal font-script block sm:inline text-4xl sm:text-6xl lg:text-7xl">delicadeza</span> que você merece.
                     </h1>
 
-                    <!-- Subheadline -->
                     <p class="text-slate-600 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        Experimente o melhor em manicure, pedicure, estética capilar, maquiagem social e spas de relaxamento exclusivo no espaço mais acolhedor da cidade.
+                        Manicure, pedicure, estética capilar, maquiagem social e spas de relaxamento exclusivo no espaço mais acolhedor da cidade.
                     </p>
 
-                    <!-- Trust Points / Highlights Grid -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-left max-w-lg mx-auto lg:mx-0">
-                        <div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-brand-pink/10 shadow-xs">
-                            <i class="fa-solid fa-gem text-brand-pink text-base"></i>
-                            <span class="text-xs font-semibold text-slate-700">Produtos Premium</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-brand-pink/10 shadow-xs">
-                            <i class="fa-solid fa-shield-heart text-brand-pink text-base"></i>
-                            <span class="text-xs font-semibold text-slate-700">Espaço Reservado</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/80 border border-brand-pink/10 shadow-xs col-span-2 sm:col-span-1">
-                            <i class="fa-solid fa-clock text-brand-pink text-base"></i>
-                            <span class="text-xs font-semibold text-slate-700">Atendimento Pontual</span>
-                        </div>
-                    </div>
-
-                    <!-- Hero Call-To-Action Buttons -->
                     <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                        <a href="https://wa.me/?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Gloss%20Est%C3%A9tica%20%26%20Beleza%20e%20gostaria%20de%20agendar%20um%20atendimento." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-lg shadow-emerald-600/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
+                        <a href="https://wa.me/5548984227642?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-base shadow-lg shadow-emerald-600/30 hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
                             <i class="fa-brands fa-whatsapp text-2xl"></i>
-                            <span>Agendar Horário no WhatsApp</span>
+                            <span>Agendar pelo WhatsApp</span>
                         </a>
-
                         <a href="#servicos" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white hover:bg-brand-pinkSoft text-brand-purple font-semibold text-base border border-brand-pink/20 shadow-sm transition flex items-center justify-center gap-2">
-                            <span>Ver Serviços e Preços</span>
+                            <span>Ver Tabela de Preços</span>
                             <i class="fa-solid fa-arrow-down-long text-xs text-brand-pink"></i>
                         </a>
                     </div>
-
-                    <!-- Quick Location Tag -->
-                    <p class="text-xs text-slate-500 pt-1 flex items-center justify-center lg:justify-start gap-1">
-                        <i class="fa-solid fa-location-dot text-brand-pink"></i>
-                        <span>Fácil acesso • Estacionamento próximo • </span>
-                        <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="text-brand-purple font-bold underline hover:text-brand-pink">Abrir no GPS</a>
-                    </p>
                 </div>
 
-                <!-- Right Column: Logo Feature & Visual Highlight -->
                 <div class="lg:col-span-5 relative">
                     <div class="relative mx-auto max-w-md lg:max-w-none">
-                        
-                        <!-- Floating Badge 1 -->
                         <div class="absolute -top-4 -left-4 z-20 glass-card px-4 py-3 rounded-2xl shadow-soft animate-float flex items-center gap-3 border border-brand-pink/30">
-                            <div class="w-10 h-10 rounded-full bg-brand-pinkSoft text-brand-pink flex items-center justify-center text-lg">
-                                <i class="fa-solid fa-spa"></i>
-                            </div>
+                            <div class="w-10 h-10 rounded-full bg-brand-pinkSoft text-brand-pink flex items-center justify-center text-lg"><i class="fa-solid fa-spa"></i></div>
                             <div>
-                                <p class="text-xs font-bold text-brand-purple">Spa dos Pés e Ofurô</p>
+                                <p class="text-xs font-bold text-brand-purple">Spa dos Pés</p>
                                 <p class="text-[10px] text-slate-500">Relaxamento total</p>
                             </div>
                         </div>
 
-                        <!-- Floating Badge 2 -->
-                        <div class="absolute -bottom-4 -right-4 z-20 glass-card px-4 py-3 rounded-2xl shadow-soft flex items-center gap-3 border border-brand-pink/30" style="animation: float-gentle 3.5s ease-in-out infinite 0.5s;">
-                            <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg">
-                                <i class="fa-brands fa-whatsapp"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs font-bold text-slate-800">Resposta Rápida</p>
-                                <p class="text-[10px] text-emerald-600 font-semibold">Online Agora</p>
-                            </div>
-                        </div>
-
-                        <!-- Main Image Hero Showcase Frame -->
                         <div class="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-gradient-to-b from-brand-purple to-brand-purpleDark p-1">
                             <div class="relative rounded-[22px] overflow-hidden bg-brand-blush">
-                                <!-- Featured Header image representing salon vibes -->
-                                <img src="https://i.ibb.co/vvQm24YD/logo.jpg" alt="Gloss Estética e Beleza Espaço" class="w-full h-80 sm:h-96 object-contain p-8 bg-white/90">
-                                
+                                <img src="https://i.ibb.co/vvQm24YD/logo.jpg" alt="Espaço Gloss" class="w-full h-80 sm:h-96 object-contain p-8 bg-white/90" onerror="this.onerror=null; this.src='https://placehold.co/600x800/f3e8f1/543976?text=Espa%C3%A7o+Gloss';">
                                 <div class="p-6 bg-gradient-to-t from-brand-purpleDark via-brand-purple/90 to-transparent text-white pt-12">
                                     <div class="flex items-center justify-between">
                                         <div>
                                             <span class="text-xs font-bold uppercase tracking-widest text-pink-300">Espaço Gloss</span>
-                                            <h3 class="text-xl font-bold font-serif">Estética & Beleza Feminina e Masculina</h3>
+                                            <h3 class="text-xl font-bold font-serif">Estética Feminina e Masculina</h3>
                                         </div>
-                                        <div class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-semibold border border-white/20">
-                                            ❤️ 100% Aprovado
-                                        </div>
+                                        <div class="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-full text-xs font-semibold border border-white/20">❤️ 100% Aprovado</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- Services Section Header & Controls -->
+    <!-- Services Section -->
     <section id="servicos" class="py-12 bg-white border-y border-brand-pink/10 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            <!-- Section Title -->
             <div class="text-center max-w-2xl mx-auto mb-8">
                 <span class="text-xs font-bold tracking-widest uppercase text-brand-pink bg-brand-pinkSoft px-3 py-1 rounded-full border border-brand-pink/20">Menu de Procedimentos</span>
                 <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-purple font-serif mt-2">Nossos Serviços & Valores</h2>
-                <p class="text-slate-600 text-sm mt-2">Escolha o serviço desejado e agende diretamente pelo WhatsApp em poucos segundos.</p>
+                <p class="text-slate-600 text-sm mt-2">Selecione os serviços e agende diretamente pelo WhatsApp.</p>
             </div>
 
-            <!-- Search and Filter Bar -->
             <div class="space-y-4">
-                
-                <!-- Search Input -->
                 <div class="max-w-md mx-auto relative">
                     <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
-                    <input type="text" id="search-input" onkeyup="filterServices()" placeholder="Buscar serviço (ex: Pedicure, Maquiagem, Corte...)" class="w-full pl-10 pr-10 py-3.5 rounded-2xl bg-brand-blush/60 border border-brand-pink/20 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition shadow-inner">
-                    <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                    <input type="text" id="search-input" onkeyup="filterServices()" placeholder="Buscar serviço (ex: Pedicure, Maquiagem...)" class="w-full pl-10 pr-10 py-3.5 rounded-2xl bg-brand-blush/60 border border-brand-pink/20 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-brand-pink focus:bg-white transition shadow-inner">
+                    <button id="clear-search" onclick="clearSearch()" class="hidden absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 p-1"><i class="fa-solid fa-xmark"></i></button>
                 </div>
 
-                <!-- Category Pills (Horizontal Scrollable on Mobile) -->
                 <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2 px-1 justify-start sm:justify-center text-xs font-medium">
-                    <button onclick="setCategory('all')" data-cat="all" class="cat-btn active px-4 py-2.5 rounded-full bg-brand-purple text-white shadow-purple-glow whitespace-nowrap transition-all">
-                        <i class="fa-solid fa-sparkles mr-1.5"></i> Todos os Serviços
-                    </button>
-                    <button onclick="setCategory('spa')" data-cat="spa" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all">
-                        <i class="fa-solid fa-spa mr-1.5"></i> Spa dos Pés
-                    </button>
-                    <button onclick="setCategory('unhas')" data-cat="unhas" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all">
-                        <i class="fa-solid fa-hand-sparkles mr-1.5"></i> Manicure & Pedicure
-                    </button>
-                    <button onclick="setCategory('cabelos')" data-cat="cabelos" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all">
-                        <i class="fa-solid fa-scissors mr-1.5"></i> Cabelos & Tratamentos
-                    </button>
-                    <button onclick="setCategory('maquiagem')" data-cat="maquiagem" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all">
-                        <i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i> Maquiagem
-                    </button>
+                    <button onclick="setCategory('all')" data-cat="all" class="cat-btn active px-4 py-2.5 rounded-full bg-brand-purple text-white shadow-purple-glow whitespace-nowrap transition-all"><i class="fa-solid fa-sparkles mr-1.5"></i> Todos</button>
+                    <button onclick="setCategory('spa')" data-cat="spa" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all"><i class="fa-solid fa-spa mr-1.5"></i> Spa dos Pés</button>
+                    <button onclick="setCategory('unhas')" data-cat="unhas" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all"><i class="fa-solid fa-hand-sparkles mr-1.5"></i> Unhas</button>
+                    <button onclick="setCategory('cabelos')" data-cat="cabelos" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all"><i class="fa-solid fa-scissors mr-1.5"></i> Cabelos</button>
+                    <button onclick="setCategory('maquiagem')" data-cat="maquiagem" class="cat-btn px-4 py-2.5 rounded-full bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white border border-brand-pink/20 whitespace-nowrap transition-all"><i class="fa-solid fa-wand-magic-sparkles mr-1.5"></i> Maquiagem</button>
                 </div>
-
             </div>
 
-            <!-- Services Grid -->
-            <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10">
-                <!-- Service Cards dynamically loaded via JS for crisp interaction & filtering -->
-            </div>
-
-            <!-- Empty Search State -->
+            <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-10"></div>
+            
             <div id="no-results" class="hidden text-center py-12">
-                <div class="w-16 h-16 bg-brand-pinkSoft text-brand-pink rounded-full flex items-center justify-center mx-auto text-2xl mb-3">
-                    <i class="fa-solid fa-heart-crack"></i>
-                </div>
+                <div class="w-16 h-16 bg-brand-pinkSoft text-brand-pink rounded-full flex items-center justify-center mx-auto text-2xl mb-3"><i class="fa-solid fa-heart-crack"></i></div>
                 <h3 class="text-lg font-bold text-brand-purple">Nenhum serviço encontrado</h3>
-                <p class="text-xs text-slate-500 mt-1">Tente pesquisar outro termo ou navegue pelas categorias acima.</p>
-                <button onclick="clearSearch()" class="mt-4 px-4 py-2 rounded-xl bg-brand-pink text-white text-xs font-semibold shadow-md">
-                    Ver todos os serviços
-                </button>
+                <button onclick="clearSearch()" class="mt-4 px-4 py-2 rounded-xl bg-brand-pink text-white text-xs font-semibold shadow-md">Limpar busca</button>
             </div>
-
         </div>
     </section>
 
-    <!-- Custom Combined Booking Drawer Trigger Banner -->
+    <!-- Combos Banner -->
     <section id="combos" class="py-12 bg-gradient-to-r from-brand-purple via-brand-purpleDark to-brand-purple text-white relative overflow-hidden">
         <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-brand-pink opacity-20 blur-3xl rounded-full"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="glass-card bg-white/10 border-white/20 rounded-3xl p-6 sm:p-10 text-center lg:text-left flex flex-col lg:flex-row items-center justify-between gap-8">
                 <div class="space-y-3 max-w-2xl">
-                    <div class="inline-flex items-center gap-2 bg-pink-500/30 text-pink-200 px-3 py-1 rounded-full text-xs font-semibold border border-pink-400/30">
-                        <i class="fa-solid fa-wand-magic-sparkles"></i> Monte seu Dia de Princesa
-                    </div>
-                    <h3 class="text-2xl sm:text-3xl font-bold font-serif">Deseja realizar mais de um procedimento no mesmo dia?</h3>
-                    <p class="text-slate-200 text-sm leading-relaxed">
-                        Selecione múltiplos serviços no nosso botão de sacola e envie a lista direta para nossa atendente organizar a agenda sem você perder tempo!
-                    </p>
+                    <div class="inline-flex items-center gap-2 bg-pink-500/30 text-pink-200 px-3 py-1 rounded-full text-xs font-semibold border border-pink-400/30"><i class="fa-solid fa-wand-magic-sparkles"></i> Monte seu Dia de Princesa</div>
+                    <h3 class="text-2xl sm:text-3xl font-bold font-serif">Deseja realizar mais de um procedimento?</h3>
+                    <p class="text-slate-200 text-sm leading-relaxed">Selecione múltiplos serviços na sacola e envie a lista completa para nossa atendente organizar sua agenda!</p>
                 </div>
                 <button onclick="toggleCartDrawer()" class="px-8 py-4 rounded-2xl bg-gradient-pink text-white font-extrabold text-sm shadow-pink-glow hover:scale-105 active:scale-95 transition whitespace-nowrap flex items-center gap-3">
                     <i class="fa-solid fa-layer-group text-lg"></i>
-                    <span>Ver Serviços Selecionados (<span id="combo-btn-count">0</span>)</span>
+                    <span>Ver Seleção (<span id="combo-btn-count">0</span>)</span>
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- About Section with High Trust Factors -->
-    <section id="sobre" class="py-16 bg-brand-blush/50">
+    <!-- Testimonials Section -->
+    <section id="depoimentos" class="py-16 bg-brand-blush/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                
-                <!-- Left Column: Visual collage with Logo & Quality Badges -->
-                <div class="space-y-6">
-                    <div class="relative">
-                        <!-- Main Card -->
-                        <div class="glass-card p-8 rounded-3xl border border-brand-pink/20 text-center shadow-soft relative z-10">
-                            <img src="https://i.ibb.co/vvQm24YD/logo.jpg" alt="Gloss Estética e Beleza Logo Completa" class="h-28 mx-auto object-contain mb-4">
-                            <h3 class="text-2xl font-bold font-serif text-brand-purple">Gloss Estética & Beleza</h3>
-                            <p class="text-xs font-medium text-brand-pink uppercase tracking-widest mt-1">Cuidado, elegância e sofisticação</p>
-                            
-                            <div class="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-brand-pink/10">
-                                <div>
-                                    <p class="text-2xl font-extrabold text-brand-purple font-serif">100%</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Higiene & Esterilização</p>
-                                </div>
-                                <div>
-                                    <p class="text-2xl font-extrabold text-brand-purple font-serif">Wella</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Linhas Profissionais</p>
-                                </div>
-                                <div>
-                                    <p class="text-2xl font-extrabold text-brand-purple font-serif">VIP</p>
-                                    <p class="text-[10px] text-slate-500 font-medium">Atendimento Reservado</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Accent decorative geometry -->
-                        <div class="absolute -top-4 -right-4 w-full h-full bg-brand-pink/10 rounded-3xl -z-0"></div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-extrabold text-brand-purple font-serif">O que nossas clientes dizem</h2>
+                <p class="text-slate-600 text-sm mt-2">A satisfação de quem já passou pelo nosso espaço</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-card p-6 rounded-2xl border border-brand-pink/10 shadow-sm">
+                    <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-sm text-slate-600 italic mb-4">"O melhor spa dos pés que já fiz! O ambiente é super reservado e higiênico. Saí renovada."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-brand-purple text-white flex items-center justify-center font-bold text-xs">M</div>
+                        <span class="text-xs font-bold text-slate-800">Mariana S.</span>
                     </div>
                 </div>
-
-                <!-- Right Column: Content -->
-                <div class="space-y-6">
-                    <span class="text-xs font-bold tracking-widest uppercase text-brand-pink bg-brand-pinkSoft px-3 py-1 rounded-full border border-brand-pink/20">Por que escolher a Gloss?</span>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-purple font-serif">Seu momento de cuidado e renovação pessoal</h2>
-                    
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Na <strong>Gloss Estética & Beleza</strong>, acreditamos que cuidar de si não é luxo, é uma necessidade essencial. Oferecemos um ambiente delicado, relaxante e aconchegante para você renovar suas energias.
-                    </p>
-
-                    <div class="space-y-3 pt-2">
-                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white border border-brand-pink/10 shadow-xs">
-                            <div class="w-8 h-8 rounded-full bg-brand-pinkSoft text-brand-pink flex items-center justify-center shrink-0 font-bold">✓</div>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-800">Espaço Reservado para Ele & Para Ela</h4>
-                                <p class="text-xs text-slate-500">Contamos com ambiente de Spa dos Pés exclusivo masculino com privacidade e conforto.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white border border-brand-pink/10 shadow-xs">
-                            <div class="w-8 h-8 rounded-full bg-brand-pinkSoft text-brand-pink flex items-center justify-center shrink-0 font-bold">✓</div>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-800">Produtos de Elite Profissional</h4>
-                                <p class="text-xs text-slate-500">Tratamentos capilares Wella, esmaltações em gel de alta durabilidade e maquiagens com produtos importados.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start gap-3 p-3 rounded-2xl bg-white border border-brand-pink/10 shadow-xs">
-                            <div class="w-8 h-8 rounded-full bg-brand-pinkSoft text-brand-pink flex items-center justify-center shrink-0 font-bold">✓</div>
-                            <div>
-                                <h4 class="text-sm font-bold text-slate-800">Ofurô e Rituais Terapêuticos</h4>
-                                <p class="text-xs text-slate-500">Escalda pés com argilas curativas, plástica dos pés e alívio de tensões do dia a dia.</p>
-                            </div>
-                        </div>
+                <div class="glass-card p-6 rounded-2xl border border-brand-pink/10 shadow-sm">
+                    <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-sm text-slate-600 italic mb-4">"Fiz minha maquiagem VIP para um casamento e durou a noite toda! Profissionais impecáveis."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-brand-pink text-white flex items-center justify-center font-bold text-xs">C</div>
+                        <span class="text-xs font-bold text-slate-800">Carla R.</span>
                     </div>
-
-                    <div class="pt-2">
-                        <a href="https://wa.me/?text=Ol%C3%A1!%20Gostaria%20de%20saber%20a%20disponibilidade%20de%20hor%C3%A1rios%20para%20esta%20semana." target="_blank" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-brand-purple hover:bg-brand-purpleDark text-white text-xs font-bold shadow-purple-glow transition">
-                            <i class="fa-brands fa-whatsapp text-lg text-emerald-400"></i>
-                            <span>Consultar Horários Disponíveis</span>
-                        </a>
-                    </div>
-
                 </div>
-
+                <div class="glass-card p-6 rounded-2xl border border-brand-pink/10 shadow-sm">
+                    <div class="flex text-amber-400 text-xs mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p class="text-sm text-slate-600 italic mb-4">"Meu marido amou o espaço masculino. Finalmente um lugar onde ele se sente confortável para cuidar dos pés."</p>
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full bg-brand-purpleLight text-white flex items-center justify-center font-bold text-xs">F</div>
+                        <span class="text-xs font-bold text-slate-800">Fernanda L.</span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Location and Google Maps Card Integration -->
-    <section id="localizacao" class="py-16 bg-white border-t border-brand-pink/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-10">
-                <span class="text-xs font-bold tracking-widest uppercase text-brand-pink bg-brand-pinkSoft px-3 py-1 rounded-full border border-brand-pink/20">Venha nos Visitar</span>
-                <h2 class="text-3xl sm:text-4xl font-extrabold text-brand-purple font-serif mt-2">Localização & Contato</h2>
-                <p class="text-slate-600 text-sm mt-2">Estamos prontos para acolher você no nosso espaço. Clique no mapa abaixo para traçar a rota perfeita.</p>
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 bg-white">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-extrabold text-brand-purple font-serif">Dúvidas Frequentes</h2>
             </div>
-
-            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
+            
+            <div class="space-y-3">
+                <div class="faq-item border border-brand-pink/20 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 text-left bg-brand-blush/30 hover:bg-brand-blush transition">
+                        <span class="font-bold text-sm text-brand-purple">Preciso agendar ou posso ir direto?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon text-brand-pink transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-white">
+                        <p class="p-4 text-sm text-slate-600">Recomendamos fortemente o agendamento prévio pelo WhatsApp para garantir seu horário e evitar esperas.</p>
+                    </div>
+                </div>
                 
-                <!-- Left: Contact Details Card -->
+                <div class="faq-item border border-brand-pink/20 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 text-left bg-brand-blush/30 hover:bg-brand-blush transition">
+                        <span class="font-bold text-sm text-brand-purple">Aceitam cartão de crédito?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon text-brand-pink transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-white">
+                        <p class="p-4 text-sm text-slate-600">Sim! Aceitamos cartões de crédito, débito e PIX. Consulte condições de parcelamento para pacotes completos.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item border border-brand-pink/20 rounded-2xl overflow-hidden">
+                    <button onclick="toggleFaq(this)" class="w-full flex items-center justify-between p-4 text-left bg-brand-blush/30 hover:bg-brand-blush transition">
+                        <span class="font-bold text-sm text-brand-purple">Tem estacionamento?</span>
+                        <i class="fa-solid fa-chevron-down faq-icon text-brand-pink transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content bg-white">
+                        <p class="p-4 text-sm text-slate-600">Possuímos vagas rotativas nas proximidades e acesso fácil para desembarque em frente ao salão.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section WITH REAL IFRAME -->
+    <section id="localizacao" class="py-16 bg-brand-blush/50 border-t border-brand-pink/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-12 gap-8 items-stretch">
                 <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl border border-brand-pink/20 flex flex-col justify-between space-y-6">
                     <div>
-                        <div class="flex items-center gap-3 mb-6">
-                            <div class="w-12 h-12 rounded-2xl bg-brand-pinkSoft text-brand-pink flex items-center justify-center text-xl shadow-xs">
-                                <i class="fa-solid fa-map-location-dot"></i>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-bold text-brand-purple">Gloss Estética & Beleza</h3>
-                                <p class="text-xs text-slate-500">Google Maps 5.0 ⭐⭐⭐⭐⭐</p>
-                            </div>
-                        </div>
-
+                        <h3 class="text-lg font-bold text-brand-purple mb-4">Gloss Estética & Beleza</h3>
                         <div class="space-y-4 text-sm text-slate-700">
                             <div class="flex items-start gap-3">
                                 <i class="fa-solid fa-location-dot text-brand-pink mt-1"></i>
                                 <div>
-                                    <strong class="block text-slate-800 text-xs uppercase tracking-wider">Endereço</strong>
-                                    <span>Acesse pelo Google Maps e venha com facilidade:</span>
-                                    <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="block text-brand-purple font-bold hover:underline mt-0.5">
-                                        maps.app.goo.gl/zrfmvnnzGQNghqet8 <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i>
-                                    </a>
+                                    <strong class="block text-slate-800 text-xs uppercase">Endereço</strong>
+                                    <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="block text-brand-purple font-bold hover:underline mt-0.5">Abrir no Google Maps <i class="fa-solid fa-arrow-up-right-from-square text-xs ml-1"></i></a>
                                 </div>
                             </div>
-
                             <div class="flex items-start gap-3">
                                 <i class="fa-solid fa-clock text-brand-pink mt-1"></i>
                                 <div>
-                                    <strong class="block text-slate-800 text-xs uppercase tracking-wider">Horário de Atendimento</strong>
-                                    <p class="text-xs text-slate-600">Segunda a Sábado: 08:00 às 19:00</p>
-                                    <p class="text-[11px] text-brand-pink font-semibold mt-0.5">* Atendimento com agendamento prévio</p>
+                                    <strong class="block text-slate-800 text-xs uppercase">Horário</strong>
+                                    <p class="text-xs text-slate-600">Seg a Sáb: 08:00 às 19:00</p>
                                 </div>
                             </div>
-
                             <div class="flex items-start gap-3">
                                 <i class="fa-brands fa-whatsapp text-emerald-500 text-lg mt-0.5"></i>
                                 <div>
-                                    <strong class="block text-slate-800 text-xs uppercase tracking-wider">Agendamentos WhatsApp</strong>
-                                    <p class="text-xs text-slate-600">Clique para enviar uma mensagem instantânea</p>
+                                    <strong class="block text-slate-800 text-xs uppercase">WhatsApp</strong>
+                                    <p class="text-xs text-slate-600">(48) 98422-7642</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Direct Map Actions -->
-                    <div class="space-y-3 pt-4 border-t border-brand-pink/10">
-                        <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-4 rounded-xl bg-brand-purple hover:bg-brand-purpleDark text-white text-xs font-bold transition text-center flex items-center justify-center gap-2 shadow-md">
-                            <i class="fa-solid fa-route"></i>
-                            <span>Abrir Rota no Google Maps</span>
-                        </a>
-                        <a href="https://wa.me/?text=Ol%C3%A1!%20Poderia%20me%20enviar%20o%20endere%C3%A7o%20e%20ponto%20de%20refer%C3%AAncia%20da%20Gloss?" target="_blank" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition text-center flex items-center justify-center gap-2">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <span>Pedir Ponto de Referência no WhatsApp</span>
-                        </a>
-                    </div>
+                    <a href="https://wa.me/5548984227642?text=Ol%C3%A1!%20Poderia%20me%20enviar%20o%20endere%C3%A7o%20completo?" target="_blank" class="w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition text-center flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Pedir Localização no Zap</span>
+                    </a>
                 </div>
 
-                <!-- Right: Interactive Embedded Map Preview Card -->
-                <div class="lg:col-span-7 rounded-3xl overflow-hidden border border-brand-pink/20 shadow-soft relative min-h-[350px] bg-slate-100 flex flex-col justify-center items-center text-center p-6">
-                    <!-- Google Maps iFrame placeholder representation with direct redirection button -->
-                    <div class="absolute inset-0 bg-cover bg-center filter opacity-90" style="background-image: url('https://placehold.co/800x600/f3e8f1/543976?text=Gloss+Est%C3%A9tica+%26+Beleza+no+Google+Maps');"></div>
-                    
-                    <div class="relative z-10 glass-card p-6 rounded-2xl max-w-sm border border-brand-pink/30 shadow-2xl">
-                        <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center mx-auto text-brand-pink text-xl shadow-md mb-3">
-                            <i class="fa-solid fa-location-dot animate-bounce"></i>
-                        </div>
-                        <h4 class="font-bold text-brand-purple text-base">Gloss Estética & Beleza</h4>
-                        <p class="text-xs text-slate-600 mt-1">Nossa localização está cadastrada no Google Maps para seu total conforto.</p>
-                        
-                        <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-brand-pink text-white text-xs font-bold shadow-pink-glow hover:scale-105 transition">
-                            <span>Ver Mapa em Tela Cheia</span>
-                            <i class="fa-solid fa-external-link text-xs"></i>
-                        </a>
-                    </div>
+                <!-- REAL GOOGLE MAPS IFRAME -->
+                <div class="lg:col-span-7 rounded-3xl overflow-hidden border border-brand-pink/20 shadow-soft relative min-h-[350px] bg-slate-100">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d113161.18049989131!2d-48.7191665!3d-27.5846338!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x952737af95c6c16b%3A0xcd5ad05b4e00eeeb!2sGloss%20Est%C3%A9tica%20%26%20Beleza!5e0!3m2!1spt-BR!2sbr!4v1787858539089!5m2!1spt-BR!2sbr" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0; position:absolute; top:0; left:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        title="Localização Gloss Estética & Beleza">
+                    </iframe>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- App-like Bottom Navigation Bar (Mobile View) -->
+    <!-- Mobile Bottom Nav -->
     <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-header border-t border-brand-pink/20 px-3 py-2 flex items-center justify-around text-[10px] font-semibold text-slate-600 shadow-2xl">
-        <a href="#servicos" class="flex flex-col items-center gap-1 text-brand-pink">
-            <i class="fa-solid fa-list-ul text-lg"></i>
-            <span>Serviços</span>
-        </a>
+        <a href="#servicos" class="flex flex-col items-center gap-1 text-brand-pink"><i class="fa-solid fa-list-ul text-lg"></i><span>Serviços</span></a>
         <button onclick="toggleCartDrawer()" class="flex flex-col items-center gap-1 relative text-brand-purple">
-            <i class="fa-solid fa-basket-shopping text-lg"></i>
-            <span>Seleção</span>
+            <i class="fa-solid fa-basket-shopping text-lg"></i><span>Seleção</span>
             <span id="mobile-cart-badge" class="hidden absolute -top-1 right-2 bg-brand-pink text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center">0</span>
         </button>
-        <a href="https://wa.me/?text=Ol%C3%A1!%20Gostaria%20de%20agendar%20um%20hor%C3%A1rio." target="_blank" class="flex flex-col items-center justify-center w-12 h-12 rounded-full bg-emerald-600 text-white shadow-lg -mt-5 border-4 border-white">
-            <i class="fa-brands fa-whatsapp text-2xl"></i>
-        </a>
-        <a href="#sobre" class="flex flex-col items-center gap-1 hover:text-brand-pink">
-            <i class="fa-solid fa-heart text-lg"></i>
-            <span>Sobre</span>
-        </a>
-        <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="flex flex-col items-center gap-1 hover:text-brand-pink">
-            <i class="fa-solid fa-location-dot text-lg"></i>
-            <span>Mapa</span>
-        </a>
+        <a href="https://wa.me/5548984227642?text=Ol%C3%A1!%20Gostaria%20de%20agendar." target="_blank" class="flex flex-col items-center justify-center w-12 h-12 rounded-full bg-emerald-600 text-white shadow-lg -mt-5 border-4 border-white"><i class="fa-brands fa-whatsapp text-2xl"></i></a>
+        <a href="#faq" class="flex flex-col items-center gap-1 hover:text-brand-pink"><i class="fa-solid fa-circle-question text-lg"></i><span>Dúvidas</span></a>
+        <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="flex flex-col items-center gap-1 hover:text-brand-pink"><i class="fa-solid fa-location-dot text-lg"></i><span>Mapa</span></a>
     </div>
 
-    <!-- Floating Persistent WhatsApp Button (Desktop & Tablet) -->
-    <a href="https://wa.me/?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Gloss%20e%20gostaria%20de%20agendar%20um%20servi%C3%A7o." target="_blank" rel="noopener noreferrer" class="hidden md:flex fixed bottom-6 right-6 z-40 items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 pr-5 rounded-full shadow-2xl transition duration-300 transform hover:scale-105 group border-2 border-white">
+    <!-- Floating WhatsApp Desktop -->
+    <a href="https://wa.me/5548984227642?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20agendar." target="_blank" rel="noopener noreferrer" class="hidden md:flex fixed bottom-6 right-6 z-40 items-center gap-3 bg-emerald-600 hover:bg-emerald-700 text-white p-3.5 pr-5 rounded-full shadow-2xl transition duration-300 transform hover:scale-105 group border-2 border-white">
         <div class="relative">
             <i class="fa-brands fa-whatsapp text-3xl"></i>
             <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-300 rounded-full border-2 border-emerald-700 pulse-ring"></span>
         </div>
         <div class="text-left">
-            <p class="text-[10px] uppercase font-extrabold tracking-wider text-emerald-200 leading-none">Atendimento On-line</p>
-            <p class="text-xs font-bold leading-tight">Agendar no WhatsApp</p>
+            <p class="text-[10px] uppercase font-extrabold tracking-wider text-emerald-200 leading-none">Agendamento</p>
+            <p class="text-xs font-bold leading-tight">(48) 98422-7642</p>
         </div>
     </a>
 
-    <!-- Slide-over Drawer for Selected Services Multi-Booking -->
+    <!-- Cart Drawer -->
     <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <!-- Backdrop -->
         <div id="cart-backdrop" onclick="toggleCartDrawer()" class="absolute inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity"></div>
-
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
             <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-in-out" id="cart-panel">
-                
-                <!-- Drawer Header -->
                 <div class="p-6 bg-brand-blush border-b border-brand-pink/20 flex items-center justify-between">
                     <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-2xl bg-brand-pink text-white flex items-center justify-center font-bold text-lg shadow-pink-glow">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </div>
+                        <div class="w-10 h-10 rounded-2xl bg-brand-pink text-white flex items-center justify-center font-bold text-lg shadow-pink-glow"><i class="fa-solid fa-basket-shopping"></i></div>
                         <div>
-                            <h3 class="text-base font-bold text-brand-purple font-serif">Sua Seleção de Serviços</h3>
-                            <p class="text-xs text-slate-500">Agende tudo em uma única conversa</p>
+                            <h3 class="text-base font-bold text-brand-purple font-serif">Sua Seleção</h3>
+                            <p class="text-xs text-slate-500">Envie tudo de uma vez</p>
                         </div>
                     </div>
-                    <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-700 text-lg">
-                        <i class="fa-solid fa-xmark"></i>
-                    </button>
+                    <button onclick="toggleCartDrawer()" class="p-2 text-slate-400 hover:text-slate-700 text-lg"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-
-                <!-- Selected Items List -->
-                <div class="p-6 flex-1 overflow-y-auto space-y-4" id="cart-items-container">
-                    <!-- Populated by JavaScript -->
-                </div>
-
-                <!-- Drawer Footer & Final Checkout Action -->
+                <div class="p-6 flex-1 overflow-y-auto space-y-4" id="cart-items-container"></div>
                 <div class="p-6 bg-white border-t border-slate-100 space-y-4 shadow-lg">
-                    <div class="space-y-1.5 text-xs text-slate-600">
-                        <div class="flex justify-between font-bold text-sm text-brand-purple">
-                            <span>Estimativa Total:</span>
-                            <span id="cart-total-price">R$ 0,00</span>
-                        </div>
-                        <p class="text-[11px] text-slate-400">* Valores sujeitos a alteração caso haja serviços de avaliação presencial.</p>
+                    <div class="flex justify-between font-bold text-sm text-brand-purple">
+                        <span>Total Estimado:</span>
+                        <span id="cart-total-price">R$ 0,00</span>
                     </div>
-
-                    <a id="send-cart-whatsapp-btn" href="#" target="_blank" rel="noopener noreferrer" onclick="if(cart.length === 0) { alert('Selecione pelo menos um serviço antes de enviar!'); return false; }" class="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
+                    <a id="send-cart-whatsapp-btn" href="#" target="_blank" onclick="if(cart.length === 0) { alert('Selecione pelo menos um serviço!'); return false; }" class="w-full py-4 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-lg shadow-emerald-600/30 transition flex items-center justify-center gap-2">
                         <i class="fa-brands fa-whatsapp text-xl"></i>
-                        <span>Enviar Seleção pelo WhatsApp</span>
+                        <span>Enviar para Agendamento</span>
                     </a>
-                    
-                    <button onclick="toggleCartDrawer()" class="w-full py-2 text-center text-xs text-slate-500 hover:text-brand-purple font-semibold">
-                        Continuar escolhendo procedimentos
-                    </button>
                 </div>
-
             </div>
         </div>
     </div>
 
-    <!-- Quick Detail Modal -->
+    <!-- Service Modal -->
     <div id="service-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs" onclick="if(event.target === this) closeModal()">
         <div class="glass-card bg-white max-w-lg w-full rounded-3xl overflow-hidden shadow-2xl border border-brand-pink/30 flex flex-col max-h-[90vh]">
             <div class="relative h-72 sm:h-80 bg-brand-blush flex items-center justify-center p-2">
                 <img id="modal-image" src="" alt="" class="w-full h-full object-contain rounded-xl">
-                <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/80 transition shadow-lg">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
+                <button onclick="closeModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/50 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/80 transition shadow-lg"><i class="fa-solid fa-xmark"></i></button>
                 <span id="modal-category" class="absolute bottom-4 left-4 bg-brand-purple/90 backdrop-blur-md text-white text-xs px-3 py-1 rounded-full font-semibold shadow-md"></span>
             </div>
-            
             <div class="p-6 overflow-y-auto space-y-4">
                 <div class="flex items-start justify-between gap-4">
                     <h3 id="modal-title" class="text-xl font-bold font-serif text-brand-purple"></h3>
                     <span id="modal-price" class="text-lg font-extrabold text-brand-pink whitespace-nowrap"></span>
                 </div>
-
                 <p id="modal-description" class="text-sm text-slate-600 leading-relaxed"></p>
-
-                <div id="modal-extra-info" class="p-3 bg-brand-blush rounded-xl border border-brand-pink/20 text-xs text-brand-purple font-medium">
-                    ✨ Atendimento personalizado no espaço Gloss. Reserve seu horário online!
-                </div>
             </div>
-
             <div class="p-6 bg-slate-50 border-t border-slate-100 flex gap-3">
-                <button id="modal-add-btn" class="flex-1 py-3 px-4 rounded-xl bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white font-bold text-xs transition border border-brand-pink/20">
-                    + Adicionar à Lista
-                </button>
-                <a id="modal-whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition flex items-center justify-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-base"></i>
-                    <span>Agendar Agora</span>
-                </a>
+                <button id="modal-add-btn" class="flex-1 py-3 px-4 rounded-xl bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white font-bold text-xs transition border border-brand-pink/20">+ Adicionar à Lista</button>
+                <a id="modal-whatsapp-btn" href="#" target="_blank" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition flex items-center justify-center gap-2"><i class="fa-brands fa-whatsapp text-base"></i><span>Agendar Só Este</span></a>
             </div>
         </div>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer class="bg-brand-purpleDark text-white pt-12 pb-24 md:pb-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid md:grid-cols-3 gap-8 pb-8 border-b border-white/10">
-                
-                <!-- Brand Info -->
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
                         <img src="https://i.ibb.co/vvQm24YD/logo.jpg" alt="Gloss Logo" class="h-10 w-auto rounded-lg bg-white p-1">
-                        <div>
-                            <span class="block text-lg font-bold font-serif leading-none">Gloss</span>
-                            <span class="text-[10px] uppercase tracking-widest text-pink-300">Estética & Beleza</span>
-                        </div>
+                        <div><span class="block text-lg font-bold font-serif leading-none">Gloss</span><span class="text-[10px] uppercase tracking-widest text-pink-300">Estética & Beleza</span></div>
                     </div>
-                    <p class="text-xs text-slate-300 leading-relaxed">
-                        Sua referência em serviços estéticos, esmaltação perfeita, tratamento capilar e rituais de bem-estar.
-                    </p>
+                    <p class="text-xs text-slate-300 leading-relaxed">Sua referência em serviços estéticos e bem-estar.</p>
                 </div>
-
-                <!-- Quick Navigation Links -->
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-pink-300">Navegação Rápida</h4>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-pink-300">Links Rápidos</h4>
                     <ul class="space-y-2 text-xs text-slate-300">
-                        <li><a href="#servicos" class="hover:text-pink-300 transition">Ver Todos os Serviços</a></li>
-                        <li><a href="#combos" class="hover:text-pink-300 transition">Agendamento de Múltiplos Serviços</a></li>
-                        <li><a href="#sobre" class="hover:text-pink-300 transition">Conheça o Espaço</a></li>
-                        <li><a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="hover:text-pink-300 transition">Localização no Google Maps</a></li>
+                        <li><a href="#servicos" class="hover:text-pink-300 transition">Serviços</a></li>
+                        <li><a href="#depoimentos" class="hover:text-pink-300 transition">Depoimentos</a></li>
+                        <li><a href="#faq" class="hover:text-pink-300 transition">Perguntas Frequentes</a></li>
                     </ul>
                 </div>
-
-                <!-- Google Maps & Social Direct Links -->
                 <div class="space-y-3">
-                    <h4 class="text-xs font-bold uppercase tracking-wider text-pink-300">Endereço & Contato</h4>
-                    <p class="text-xs text-slate-300">
-                        Acesse a rota do nosso espaço diretamente no seu aplicativo de navegação preferido:
-                    </p>
-                    <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white border border-white/10 transition">
-                        <i class="fa-solid fa-map-pin text-pink-400"></i>
-                        <span>Google Maps - Gloss Estética</span>
-                    </a>
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-pink-300">Contato</h4>
+                    <p class="text-xs text-slate-300">(48) 98422-7642</p>
+                    <a href="https://maps.app.goo.gl/zrfmvnnzGQNghqet8" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold text-white border border-white/10 transition"><i class="fa-solid fa-map-pin text-pink-400"></i><span>Google Maps</span></a>
                 </div>
-
             </div>
-
-            <!-- Footer Bottom Rights -->
-            <div class="pt-6 text-center text-xs text-slate-400 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <p>&copy; Gloss Estética & Beleza. Todos os direitos reservados.</p>
-                <p class="text-[11px] text-slate-400">Desenvolvido com sofisticação para melhor conversão de agendamentos.</p>
-            </div>
+            <div class="pt-6 text-center text-xs text-slate-400">&copy; Gloss Estética & Beleza. Todos os direitos reservados.</div>
         </div>
     </footer>
 
-    <!-- Application Logic & Interactive State Script -->
+    <!-- Application Logic -->
     <script>
-        // Exact Data List Provided by Client
+        // CONFIGURAÇÃO DO WHATSAPP
+        const PHONE_NUMBER = "5548984227642"; 
+
         const servicesData = [
-            {
-                id: 1,
-                title: "Spa dos Pés Masculino",
-                price: 89.00,
-                priceFormatted: "R$ 89,00",
-                description: "Spa dos pés para eles. Ambiente reservado! Perfeito para presentear!",
-                image: "https://i.ibb.co/jvMtVMTZ/01.jpg",
-                category: "spa",
-                popular: true
-            },
-            {
-                id: 2,
-                title: "Maquiagem Completa",
-                subtitle: "Cílios a parte!",
-                price: 185.00,
-                priceFormatted: "R$ 185,00",
-                description: "Maquiagem Completa profissional. Acabamento sofisticado para eventos e ocasiões especiais. Cílios a parte!",
-                image: "https://i.ibb.co/cXFhNCZx/02.jpg",
-                category: "maquiagem",
-                popular: false
-            },
-            {
-                id: 3,
-                title: "Corte Estilizado + Escova",
-                subtitle: "Foto para inspiração do Corte",
-                price: 159.00,
-                priceFormatted: "R$ 159,00",
-                description: "Corte personalizado de acordo com o formato do seu rosto e inspiração desejada + finalização em escova especial.",
-                image: "https://i.ibb.co/tTf49Gnn/03.jpg",
-                category: "cabelos",
-                popular: true
-            },
-            {
-                id: 4,
-                title: "Progressiva / Realinhamento / Botox",
-                subtitle: "AVALIAÇÃO PARA ORÇAMENTO - Somente presencial!",
-                price: 350.00,
-                priceFormatted: "A partir de R$ 350,00*",
-                description: "Realinhamento capilar, hidratação profunda e redução de volume. AVALIAÇÃO PARA ORÇAMENTO Somente presencial!",
-                image: "https://i.ibb.co/PzTzmDxJ/04.jpg",
-                category: "cabelos",
-                popular: false
-            },
-            {
-                id: 5,
-                title: "Plástica dos Pés 👣 ou Escalda pés com argila",
-                price: 85.00,
-                priceFormatted: "R$ 85,00",
-                description: "Tirar as calosidades ou Relaxar com Escalda pés e argilas curativas, e ainda sair com pedicure completo, legal real né?",
-                image: "https://i.ibb.co/NdYk67yB/05.jpg",
-                category: "spa",
-                popular: true
-            },
-            {
-                id: 6,
-                title: "Corte Feminino c/ tratamento Wella",
-                subtitle: "Segunda a Quinta feira!",
-                price: 184.00,
-                priceFormatted: "R$ 184,00",
-                description: "Corte feminino impecável combinado com o renomado tratamento capilar profissional Wella. Válido de Segunda a Quinta-feira!",
-                image: "https://i.ibb.co/q3H09Mhx/06.jpg",
-                category: "cabelos",
-                popular: true
-            },
-            {
-                id: 7,
-                title: "Maquiagem VIP",
-                price: 220.00,
-                priceFormatted: "R$ 220,00",
-                description: "Maquiagem completa com cílios inclusos. Os melhores produtos do mercado para durabilidade máxima!",
-                image: "https://i.ibb.co/1Ykh3xXr/07.jpg",
-                category: "maquiagem",
-                popular: true
-            },
-            {
-                id: 8,
-                title: "Spa dos pés com relaxamento no ofurô",
-                price: 99.00,
-                priceFormatted: "R$ 99,00",
-                description: "Ritual completo de relaxamento para seus pés no ofurô, esfoliação e hidratação profunda.",
-                image: "https://i.ibb.co/0prkRN6t/08.jpg",
-                category: "spa",
-                popular: true
-            },
-            {
-                id: 9,
-                title: "Escova Babyliss",
-                subtitle: "A partir de R$ 169,90",
-                price: 190.00,
-                priceFormatted: "R$ 190,00",
-                description: "Escova modelada com acabamento em ondas babyliss perfeitas e duradouras. A partir de R$ 169,90 a R$ 190,00.",
-                image: "https://i.ibb.co/dsCGTQ4t/09.jpg",
-                category: "cabelos",
-                popular: false
-            },
-            {
-                id: 10,
-                title: "Esmaltação em Gel",
-                price: 109.00,
-                priceFormatted: "R$ 109,00",
-                description: "Tem uma viagem e precisa que as unhas durem belas por semanas? A esmaltação em gel é a escolha perfeita!",
-                image: "https://i.ibb.co/PvbGQ5g3/10.jpg",
-                category: "unhas",
-                popular: true
-            },
-            {
-                id: 11,
-                title: "Pedicure",
-                price: 47.00,
-                priceFormatted: "R$ 47,00",
-                description: "Cuidado e higienização completa das unhas dos pés, cutilagem e esmaltação impecável.",
-                image: "https://i.ibb.co/35F5JgHH/11.jpg",
-                category: "unhas",
-                popular: false
-            },
-            {
-                id: 12,
-                title: "Manicure",
-                price: 42.00,
-                priceFormatted: "R$ 42,00",
-                description: "Tratamento tradicional para as unhas das mãos, cutilagem delicada e esmaltação perfeita.",
-                image: "https://i.ibb.co/8DShVtLJ/12.jpg",
-                category: "unhas",
-                popular: false
-            }
+            { id: 1, title: "Spa dos Pés Masculino", price: 89.00, priceFormatted: "R$ 89,00", description: "Spa dos pés para eles. Ambiente reservado! Perfeito para presentear!", image: "https://i.ibb.co/jvMtVMTZ/01.jpg", category: "spa", popular: true },
+            { id: 2, title: "Maquiagem Completa", subtitle: "Cílios a parte!", price: 185.00, priceFormatted: "R$ 185,00", description: "Maquiagem Completa profissional. Acabamento sofisticado.", image: "https://i.ibb.co/cXFhNCZx/02.jpg", category: "maquiagem", popular: false },
+            { id: 3, title: "Corte Estilizado + Escova", subtitle: "Foto para inspiração", price: 159.00, priceFormatted: "R$ 159,00", description: "Corte personalizado + finalização em escova especial.", image: "https://i.ibb.co/tTf49Gnn/03.jpg", category: "cabelos", popular: true },
+            { id: 4, title: "Progressiva / Botox", subtitle: "Avaliação Presencial", price: 350.00, priceFormatted: "A partir de R$ 350,00*", description: "Realinhamento capilar e hidratação profunda. Avaliação obrigatória.", image: "https://i.ibb.co/PzTzmDxJ/04.jpg", category: "cabelos", popular: false },
+            { id: 5, title: "Plástica dos Pés ou Escalda", price: 85.00, priceFormatted: "R$ 85,00", description: "Remoção de calosidades ou relaxamento com argilas + pedicure.", image: "https://i.ibb.co/NdYk67yB/05.jpg", category: "spa", popular: true },
+            { id: 6, title: "Corte Fem. c/ tratamento Wella", subtitle: "Seg a Qui!", price: 184.00, priceFormatted: "R$ 184,00", description: "Corte feminino + tratamento Wella. Válido de Segunda a Quinta.", image: "https://i.ibb.co/q3H09Mhx/06.jpg", category: "cabelos", popular: true },
+            { id: 7, title: "Maquiagem VIP", price: 220.00, priceFormatted: "R$ 220,00", description: "Maquiagem completa com cílios inclusos. Alta durabilidade.", image: "https://i.ibb.co/1Ykh3xXr/07.jpg", category: "maquiagem", popular: true },
+            { id: 8, title: "Spa dos pés c/ ofurô", price: 99.00, priceFormatted: "R$ 99,00", description: "Ritual completo no ofurô, esfoliação e hidratação.", image: "https://i.ibb.co/0prkRN6t/08.jpg", category: "spa", popular: true },
+            { id: 9, title: "Escova Babyliss", subtitle: "A partir de R$ 169,90", price: 190.00, priceFormatted: "R$ 190,00", description: "Ondas babyliss perfeitas e duradouras.", image: "https://i.ibb.co/dsCGTQ4t/09.jpg", category: "cabelos", popular: false },
+            { id: 10, title: "Esmaltação em Gel", price: 109.00, priceFormatted: "R$ 109,00", description: "Durabilidade de semanas. Ideal para viagens.", image: "https://i.ibb.co/PvbGQ5g3/10.jpg", category: "unhas", popular: true },
+            { id: 11, title: "Pedicure", price: 47.00, priceFormatted: "R$ 47,00", description: "Higienização completa, cutilagem e esmaltação.", image: "https://i.ibb.co/35F5JgHH/11.jpg", category: "unhas", popular: false },
+            { id: 12, title: "Manicure", price: 42.00, priceFormatted: "R$ 42,00", description: "Cutilagem delicada e esmaltação perfeita.", image: "https://i.ibb.co/8DShVtLJ/12.jpg", category: "unhas", popular: false }
         ];
 
-        // Global State
         let activeCategory = 'all';
         let cart = [];
 
-        // Render Services Cards Grid
         function renderServices() {
             const grid = document.getElementById('services-grid');
             const noResults = document.getElementById('no-results');
             const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
-
             grid.innerHTML = '';
 
             const filtered = servicesData.filter(item => {
                 const matchesCat = activeCategory === 'all' || item.category === activeCategory;
-                const matchesSearch = item.title.toLowerCase().includes(searchTerm) || 
-                                      item.description.toLowerCase().includes(searchTerm) ||
-                                      (item.subtitle && item.subtitle.toLowerCase().includes(searchTerm));
+                const matchesSearch = item.title.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
                 return matchesCat && matchesSearch;
             });
 
@@ -896,77 +575,44 @@
 
             filtered.forEach(service => {
                 const inCart = cart.some(c => c.id === service.id);
-                
-                // Create single direct WhatsApp URL for immediate one-click booking
-                const waMessage = encodeURIComponent(`Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20servi%C3%A7o%20*${service.title}*%20(${service.priceFormatted})%20na%20Gloss%20Est%C3%A9tica%20%26%20Beleza.`);
-                const waUrl = `https://wa.me/?text=${waMessage}`;
+                const waMessage = encodeURIComponent(`Olá! Gostaria de agendar o serviço *${service.title}* (${service.priceFormatted}).`);
+                const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${waMessage}`;
 
                 const cardHtml = `
                     <div class="glass-card rounded-3xl overflow-hidden border border-brand-pink/20 shadow-soft hover:shadow-xl transition-all duration-300 flex flex-col justify-between group">
-                        
-                        <!-- Image Container -->
                         <div class="relative h-48 sm:h-52 overflow-hidden bg-slate-100 cursor-pointer" onclick="openModal(${service.id})">
                             <img src="${service.image}" alt="${service.title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" onerror="this.onerror=null; this.src='https://placehold.co/400x300/f3e8f1/543976?text=${encodeURIComponent(service.title)}';">
-                            
-                            ${service.popular ? `
-                                <span class="absolute top-3 left-3 bg-brand-pink text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md uppercase tracking-wider">
-                                    ⭐ Mais Pedido
-                                </span>
-                            ` : ''}
-
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 text-white text-xs font-semibold">
-                                <span class="flex items-center gap-1"><i class="fa-solid fa-eye"></i> Clique para detalhes</span>
-                            </div>
+                            ${service.popular ? `<span class="absolute top-3 left-3 bg-brand-pink text-white text-[10px] font-extrabold px-2.5 py-1 rounded-full shadow-md uppercase tracking-wider">⭐ Mais Pedido</span>` : ''}
                         </div>
-
-                        <!-- Card Body -->
                         <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
                             <div>
-                                <div class="flex items-start justify-between gap-2">
-                                    <h3 class="font-bold text-base text-brand-purple font-serif leading-snug cursor-pointer hover:text-brand-pink transition" onclick="openModal(${service.id})">
-                                        ${service.title}
-                                    </h3>
-                                </div>
-                                
-                                ${service.subtitle ? `
-                                    <p class="text-[11px] font-semibold text-brand-pink mt-0.5">${service.subtitle}</p>
-                                ` : ''}
-
-                                <p class="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
-                                    ${service.description}
-                                </p>
+                                <h3 class="font-bold text-base text-brand-purple font-serif leading-snug cursor-pointer hover:text-brand-pink transition" onclick="openModal(${service.id})">${service.title}</h3>
+                                ${service.subtitle ? `<p class="text-[11px] font-semibold text-brand-pink mt-0.5">${service.subtitle}</p>` : ''}
+                                <p class="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">${service.description}</p>
                             </div>
-
-                            <!-- Price and Action Buttons -->
                             <div class="pt-3 border-t border-brand-pink/10 space-y-2">
                                 <div class="flex items-center justify-between">
                                     <span class="text-[10px] uppercase font-bold text-slate-400">Valor</span>
                                     <span class="text-base font-extrabold text-brand-purple font-sans">${service.priceFormatted}</span>
                                 </div>
-
                                 <div class="grid grid-cols-2 gap-2 pt-1">
-                                    <!-- Add to Multi-Booking Cart -->
                                     <button onclick="toggleCartItem(${service.id})" class="py-2.5 px-2 rounded-xl ${inCart ? 'bg-brand-purple text-white' : 'bg-brand-pinkSoft text-brand-purple hover:bg-brand-pink hover:text-white'} text-xs font-bold transition flex items-center justify-center gap-1 border border-brand-pink/20">
                                         <i class="fa-solid ${inCart ? 'fa-check' : 'fa-plus'}"></i>
                                         <span>${inCart ? 'Adicionado' : 'Selecionar'}</span>
                                     </button>
-
-                                    <!-- Direct Agendar via WhatsApp -->
-                                    <a href="${waUrl}" target="_blank" rel="noopener noreferrer" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center justify-center gap-1 shadow-sm">
+                                    <a href="${waUrl}" target="_blank" class="py-2.5 px-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition flex items-center justify-center gap-1 shadow-sm">
                                         <i class="fa-brands fa-whatsapp text-sm"></i>
                                         <span>Agendar</span>
                                     </a>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 `;
                 grid.insertAdjacentHTML('beforeend', cardHtml);
             });
         }
 
-        // Category Filter Toggle
         function setCategory(cat) {
             activeCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
@@ -981,15 +627,10 @@
             renderServices();
         }
 
-        // Search Filter
         function filterServices() {
             const input = document.getElementById('search-input');
             const clearBtn = document.getElementById('clear-search');
-            if (input.value.length > 0) {
-                clearBtn.classList.remove('hidden');
-            } else {
-                clearBtn.classList.add('hidden');
-            }
+            clearBtn.classList.toggle('hidden', input.value.length === 0);
             renderServices();
         }
 
@@ -999,93 +640,64 @@
             renderServices();
         }
 
-        // Cart State & Drawer Logic
         function toggleCartItem(id) {
-            const service = servicesData.find(s => s.id === id);
             const index = cart.findIndex(c => c.id === id);
-            if (index > -1) {
-                cart.splice(index, 1);
-            } else {
-                cart.push(service);
-            }
+            if (index > -1) cart.splice(index, 1);
+            else cart.push(servicesData.find(s => s.id === id));
             updateCartUI();
             renderServices();
         }
 
         function updateCartUI() {
-            const badgeCount = document.getElementById('cart-badge-count');
-            const mobileBadge = document.getElementById('mobile-cart-badge');
-            const comboBtnCount = document.getElementById('combo-btn-count');
-            
             const totalCount = cart.length;
+            document.getElementById('cart-badge-count').innerText = totalCount;
+            document.getElementById('mobile-cart-badge').innerText = totalCount;
+            document.getElementById('combo-btn-count').innerText = totalCount;
+            
+            const badgeEls = [document.getElementById('cart-badge-count'), document.getElementById('mobile-cart-badge')];
+            badgeEls.forEach(el => el.classList.toggle('hidden', totalCount === 0));
 
-            comboBtnCount.innerText = totalCount;
-
-            if (totalCount > 0) {
-                badgeCount.innerText = totalCount;
-                badgeCount.classList.remove('hidden');
-                mobileBadge.innerText = totalCount;
-                mobileBadge.classList.remove('hidden');
-            } else {
-                badgeCount.classList.add('hidden');
-                mobileBadge.classList.add('hidden');
-            }
-
-            // Update Drawer List
             const container = document.getElementById('cart-items-container');
             const totalPriceEl = document.getElementById('cart-total-price');
             const whatsappBtn = document.getElementById('send-cart-whatsapp-btn');
 
             if (cart.length === 0) {
-                container.innerHTML = `
-                    <div class="text-center py-12 space-y-3">
-                        <div class="w-16 h-16 bg-brand-pinkSoft text-brand-pink rounded-full flex items-center justify-center mx-auto text-2xl">
-                            <i class="fa-solid fa-basket-shopping"></i>
-                        </div>
-                        <p class="text-sm font-bold text-brand-purple">Sua lista está vazia</p>
-                        <p class="text-xs text-slate-500 max-w-xs mx-auto">Clique em "+ Selecionar" nos serviços desejados para agendá-los juntos pelo WhatsApp.</p>
-                    </div>
-                `;
+                container.innerHTML = `<div class="text-center py-12 space-y-3"><div class="w-16 h-16 bg-brand-pinkSoft text-brand-pink rounded-full flex items-center justify-center mx-auto text-2xl"><i class="fa-solid fa-basket-shopping"></i></div><p class="text-sm font-bold text-brand-purple">Sua lista está vazia</p></div>`;
                 totalPriceEl.innerText = 'R$ 0,00';
                 whatsappBtn.href = "#";
                 return;
             }
 
             let total = 0;
-            let messageText = "Ol%C3%A1!%20Gostaria%20de%20agendar%20os%20seguintes%20servi%C3%A7os%20na%20Gloss%20Est%C3%A9tica%20%26%20Beleza%3A%0A%0A";
-            
+            let messageText = "Olá! Vim pelo site e gostaria de agendar estes serviços:%0A%0A";
             container.innerHTML = '';
 
             cart.forEach((item, index) => {
                 total += item.price;
-                messageText += `${index + 1}.%20*${encodeURIComponent(item.title)}*%20(${encodeURIComponent(item.priceFormatted)})%0A`;
-                
-                const itemHtml = `
+                messageText += `▪️ *${item.title}* (${item.priceFormatted})%0A`;
+                container.insertAdjacentHTML('beforeend', `
                     <div class="flex items-center justify-between p-3 rounded-2xl bg-brand-blush/60 border border-brand-pink/20 gap-3">
-                        <img src="${item.image}" alt="${item.title}" class="w-12 h-12 rounded-xl object-cover" onerror="this.onerror=null; this.src='https://placehold.co/100x100/f3e8f1/543976?text=Gloss';">
+                        <img src="${item.image}" class="w-12 h-12 rounded-xl object-cover" onerror="this.src='https://placehold.co/100x100/f3e8f1/543976?text=Gloss';">
                         <div class="flex-1 min-w-0">
                             <h4 class="text-xs font-bold text-brand-purple truncate">${item.title}</h4>
                             <p class="text-xs font-extrabold text-brand-pink">${item.priceFormatted}</p>
                         </div>
-                        <button onclick="toggleCartItem(${item.id})" class="p-1.5 text-slate-400 hover:text-red-500 text-sm">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
+                        <button onclick="toggleCartItem(${item.id})" class="p-1.5 text-slate-400 hover:text-red-500 text-sm"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
-                `;
-                container.insertAdjacentHTML('beforeend', itemHtml);
+                `);
             });
 
             totalPriceEl.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
-            
-            messageText += `%0A*Valor%20Estimado%20Total%3A*%20R%24%20${total.toFixed(2).replace('.', ',')}%0A%0APoderia%20me%20informar%20os%20hor%C3%A1rios%20dispon%C3%ADveis%3F`;
-            whatsappBtn.href = `https://wa.me/?text=${messageText}`;
+            messageText += `%0A*Total Estimado:* R$ ${total.toFixed(2).replace('.', ',')}%0A%0APoderia me confirmar horários disponíveis?`;
+            whatsappBtn.href = `https://wa.me/${PHONE_NUMBER}?text=${messageText}`;
         }
 
         function toggleCartDrawer() {
             const drawer = document.getElementById('cart-drawer');
             const panel = document.getElementById('cart-panel');
-
-            if (drawer.classList.contains('pointer-events-none')) {
+            const isOpen = !drawer.classList.contains('pointer-events-none');
+            
+            if (!isOpen) {
                 drawer.classList.remove('pointer-events-none', 'opacity-0');
                 drawer.classList.add('opacity-100');
                 panel.classList.remove('translate-x-full');
@@ -1096,36 +708,32 @@
             }
         }
 
-        // Service Quick View Modal
         function openModal(id) {
             const service = servicesData.find(s => s.id === id);
             if (!service) return;
-
             document.getElementById('modal-image').src = service.image;
             document.getElementById('modal-title').innerText = service.title;
             document.getElementById('modal-price').innerText = service.priceFormatted;
             document.getElementById('modal-description').innerText = service.description;
             document.getElementById('modal-category').innerText = service.category.toUpperCase();
-
-            const waMessage = encodeURIComponent(`Ol%C3%A1!%20Gostaria%20de%20agendar%20o%20servi%C3%A7o%20*${service.title}*%20(${service.priceFormatted})%20na%20Gloss.`);
-            document.getElementById('modal-whatsapp-btn').href = `https://wa.me/?text=${waMessage}`;
+            
+            const waMessage = encodeURIComponent(`Olá! Gostaria de agendar o serviço *${service.title}*.`);
+            document.getElementById('modal-whatsapp-btn').href = `https://wa.me/${PHONE_NUMBER}?text=${waMessage}`;
 
             const addBtn = document.getElementById('modal-add-btn');
             const inCart = cart.some(c => c.id === service.id);
             addBtn.innerText = inCart ? '✓ Remover da Seleção' : '+ Adicionar à Lista';
-            addBtn.onclick = () => {
-                toggleCartItem(service.id);
-                closeModal();
-            };
-
+            addBtn.onclick = () => { toggleCartItem(service.id); closeModal(); };
             document.getElementById('service-modal').classList.remove('hidden');
         }
 
-        function closeModal() {
-            document.getElementById('service-modal').classList.add('hidden');
+        function closeModal() { document.getElementById('service-modal').classList.add('hidden'); }
+
+        function toggleFaq(btn) {
+            const item = btn.parentElement;
+            item.classList.toggle('active');
         }
 
-        // Initialize App on DOM Load
         window.onload = function() {
             renderServices();
             updateCartUI();
